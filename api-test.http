@@ -1,0 +1,21 @@
+@baseUrl = http://localhost:3003
+
+### Page d'accueil (liste des endpoints)
+GET {{baseUrl}}/
+Accept: application/json
+
+### Vérification de l'état + connexion SQL
+GET {{baseUrl}}/health
+Accept: application/json
+
+### Tous les appels (jointure ZAPPEL/ZODM), filtre par date de début (YYYYMMDD)
+GET {{baseUrl}}/api/zappel?dateDebut=20260101
+Accept: application/json
+
+### Un appel par référence
+GET {{baseUrl}}/api/zappel/APP-0001
+Accept: application/json
+
+### Statistiques des appels par type
+GET {{baseUrl}}/api/zappel/stats/by-type
+Accept: application/json
