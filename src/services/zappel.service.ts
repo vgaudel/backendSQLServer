@@ -1,24 +1,5 @@
-import { db } from './database.service';
-
-/**
- * Interface pour les résultats de la requête ZAPPEL
- */
-export interface ZAppelResult {
-	REFAPPEL_0: string;
-	CREDAT_0: Date;
-	CREDAT_0_ZODM: Date;
-	ZLIBINTBPR_0: string;
-	CONTACT_0: string;
-	BPADES_0: string;
-	MESSAGE_0: string;
-	TYPE_0: string;
-	OBSINTERNE_0: string;
-	OBSCLIENT_0: string;
-	OBSCLIENT_1: string;
-	OBSCLIENT_2: string;
-	REFBPCINTER_0: string;
-	REFBPCEQUIP_0: string;
-}
+import { db } from '../config/database';
+import { ZAppelResult, ZAppelCountByType } from '../models/zappel.model';
 
 /**
  * Service pour les opérations sur les tables ZAPPEL et ZODM
@@ -97,7 +78,7 @@ export class ZAppelService {
 	/**
 	 * Compter les appels par type
 	 */
-	async countAppelsByType(): Promise<Array<{ TYPE_0: string; count: number }>> {
+	async countAppelsByType(): Promise<ZAppelCountByType[]> {
 		const query = `
 			SELECT TYPE_0, COUNT(*) as count
 			FROM ZAPPEL
@@ -106,7 +87,7 @@ export class ZAppelService {
 		`;
 
 		try {
-			const result = await db.query(query);
+			const result = await db.query<ZAppelCountByType>(query);
 			return result.recordset;
 		} catch (error) {
 			console.error('Erreur lors du comptage des appels:', error);
