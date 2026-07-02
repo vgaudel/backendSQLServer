@@ -1,12 +1,8 @@
 import type { ConnectionPool, IResult } from 'mssql';
 import mssql from 'mssql';
-import { dbConfig, authType } from './db.config';
+import { dbConfig } from './db.config';
 
-// Choix du driver selon le mode d'authentification :
-//   'trusted'          -> msnodesqlv8 (session Windows courante via ODBC/SSPI)
-//   'ntlm' / 'default' -> tedious (driver TDS par défaut de mssql)
-const sql: typeof mssql =
-	authType === 'trusted' ? require('mssql/msnodesqlv8') : mssql;
+const sql: typeof mssql = mssql;
 
 /**
  * Service de gestion de la connexion à la base de données SQL Server

@@ -5,7 +5,7 @@
   "main": "dist/server.js",
   "scripts": {
     "build": "tsc",
-    "start": "tsc && dotenv -- node dist/server.js",
+    "start": "tsc && node dist/server.js",
     "dev": "dotenv -- tsc-watch --onSuccess \"node dist/server.js\""
   },
   "keywords": [],
